@@ -71,9 +71,9 @@ export const productType = defineType({
       type: "string",
       options: {
         list: [
-          { title: "New", value: "new" },
-          { title: "Hot", value: "hot" },
-          { title: "Sale", value: "sale" },
+          { title: "Anime", value: "anime" },
+          { title: "Marvel", value: "marvel" },
+          { title: "Others", value: "others" },
         ],
       },
     }),
