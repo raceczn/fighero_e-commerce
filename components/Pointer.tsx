@@ -6,9 +6,9 @@ const Pointer = (props: { name: string; color?: "red" | "blue" }) => {
     const { name, color } = props;
 
     return (
-        <div >
-            <MousePointer2 size={25} className="mb-1"/>
-             <p
+        <div>
+            <MousePointer2 size={25} className="mb-1 text-white opacity-70" />
+            <p
                 className={twMerge(
                     "ml-5 inline-flex rounded-full font-medium text-sm bg-blue-500 px-2 rounded-tl-none text-white",
                     color === "red" && "bg-red-500"

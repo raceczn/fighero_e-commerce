@@ -7,6 +7,13 @@ import { useEffect } from "react";
 import { banner_1 } from "@/images";
 import Link from "next/link";
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export default function Hero() {
   const [leftDesignScope, leftDesignAnimate] = useAnimate();
   const [leftPointerScope, leftPointerAnimate] = useAnimate();
@@ -15,43 +22,25 @@ export default function Hero() {
   const [rightPointerScope, rightPointerAnimate] = useAnimate();
 
   useEffect(() => {
-    leftDesignAnimate([
-      [leftDesignScope.current, { opacity: 1 }, { duration: 0.5 }],
-      [leftDesignScope.current, { y: 0, x: 0 }, { duration: 0.5 }],
-    ]);
-
     leftPointerAnimate([
-      [leftPointerScope.current, { opacity: 1 }, { duration: 0.5 }],
-      [leftPointerScope.current, { y: 0, x: -100 }, { duration: 0.5 }],
       [
         leftPointerScope.current,
-        { y: [0, 16, 0], x: 0 },
-        { duration: 0.5, ease: "easeInOut" },
+        { opacity: 1, x: 0, y: 0 },
+        { duration: 1, ease: "easeOut" },
       ],
-    ]);
-
-    rightDesignAnimate([
-      [rightDesignScope.current, { opacity: 1 }, { duration: 0.5, delay: 1.5 }],
-      [rightDesignScope.current, { y: 0, x: 0 }, { duration: 0.5 }],
     ]);
 
     rightPointerAnimate([
       [
         rightPointerScope.current,
-        { opacity: 1 },
-        { duration: 0.5, delay: 1.5 },
-      ],
-      [rightPointerScope.current, { y: 0, x: 175 }, { duration: 0.5 }],
-      [
-        rightPointerScope.current,
-        { y: [0, 20, 0], x: 0 },
-        { duration: 0.5, ease: "easeInOut" },
+        { opacity: 1, x: 0, y: 0 },
+        { duration: 1, ease: "easeOut" },
       ],
     ]);
   }, []);
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className={`${inter.className} relative py-28 overflow-hidden`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -76,7 +65,7 @@ export default function Hero() {
         <motion.div
           ref={leftPointerScope}
           initial={{ opacity: 0, y: 100, x: -200 }}
-          className="absolute top-96 left-56 hidden lg:block"
+          className="absolute top-86 left-66 hidden lg:block"
         >
           <Pointer name="Anime" />
         </motion.div>
@@ -97,7 +86,7 @@ export default function Hero() {
 
         {/* Main content */}
         <div className="flex justify-center">
-          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full text-white font-semibold shadow-md">
+          <div className="relative mx-auto mb-2 max-w-fit rounded-full border-2 border-[#328E6E] bg-white/70 px-4 py-1 text-sm font-semibold text-text-primary md:text-base">
             ✨ Shop. Collect. Conquer.
           </div>
         </div>
@@ -113,9 +102,9 @@ export default function Hero() {
         <div className="mt-4 flex justify-center gap-4 sm:mt-6">
           <Link
             href="/shop"
-            className="inline-block rounded border border-[#3A59D1] bg-[#3D90D7] px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-[#3A59D1] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#3A59D1] focus:ring-offset-2"
+            className="px-12 inline-block rounded-lg border border-white/30 bg-gradient-to-r from-[#4E71FF] to-[#3D90D7] px-6 py-3 font-medium text-white shadow-md transition-all hover:shadow-lg hover:from-[#3A59D1]/90 hover:to-[#3D90D7]/90 focus:outline-none focus:ring-2 focus:ring-[#3A59D7] focus:ring-offset-2 transform hover:-translate-y-0.5 active:translate-y-0"
           >
-            Shop Now!
+            Buy Now!
           </Link>
         </div>
       </div>

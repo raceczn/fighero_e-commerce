@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
@@ -16,6 +17,7 @@ export default defineConfig({
   dataset,
   schema,
   title: 'Admin Panel',
+  
   plugins: [
     structureTool({
       structure,
@@ -27,7 +29,6 @@ export default defineConfig({
   document: {
     actions: (prev, { schemaType }) => {
       // You can add conditional logic here if needed
-      // For example, only modify actions for specific schema types
       return customDocumentActions(prev)
     }
   },
