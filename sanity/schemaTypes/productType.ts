@@ -83,9 +83,8 @@ export const productType = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Gadget", value: "gadget" },
-          { title: "Appliances", value: "appliances" },
-          { title: "Refrigerators", value: "refrigerators" },
+          { title: "Anime", value: "anime" },
+          { title: "Marvel", value: "marvel" },
           { title: "Others", value: "others" },
         ],
       },
@@ -109,7 +108,9 @@ export const productType = defineType({
       const image = media && media[0];
       return {
         title: title,
-        subtitle: `$${subtitle}`,
+        subtitle: `₱${Number(subtitle).toLocaleString("en-PH", {
+        minimumFractionDigits: 2,
+      })}`,
         media: image,
       };
     },

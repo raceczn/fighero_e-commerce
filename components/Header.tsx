@@ -1,7 +1,6 @@
 // components/Header.tsx
 "use client";
 
-import React from "react";
 import Container from "./Container";
 import Logo from "./Logo";
 import HeaderMenu from "./HeaderMenu";
@@ -14,9 +13,44 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Logs } from "lucide-react";
 import SyncClerkUser from "./SyncClerkUser";
+import React, { useEffect, useState } from "react";
+
 
 export default function Header() {
   const { user, isSignedIn } = useUser();
+  const [ordersCount, setOrdersCount] = useState(0);
+
+  useEffect(() => {
+  if (!isSignedIn || !user) return;
+
+  const userId = user.id;
+  let isMounted = true;
+
+  async function fetchOrders() {
+    try {
+      const res = await fetch(`/api/orders?userId=${userId}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (isMounted) setOrdersCount(data.orders.length);
+      } else {
+        if (isMounted) setOrdersCount(0);
+      }
+    } catch {
+      if (isMounted) setOrdersCount(0);
+    }
+  }
+
+  fetchOrders();
+
+  const intervalId = setInterval(fetchOrders, 1000); // every 1 second
+
+  return () => {
+    isMounted = false;
+    clearInterval(intervalId);
+  };
+}, [isSignedIn, user]);
+
+
 
   // You can fetch orders client-side here or do it server-side if needed
   // For now, let's skip orders for simplicity or add your orders fetch logic here
@@ -59,7 +93,7 @@ export default function Header() {
               <Logs />
               {/* Show order count here if you implement */}
               <span className="absolute -top-1 -right-1 bg-shop_btn_dark_green text-white h-3.5 w-3.5 rounded-full text-xs font-semibold flex items-center justify-center">
-                0
+                {ordersCount}
               </span>
               <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-black/80 px-2 py-0.5 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                 Orders

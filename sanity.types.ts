@@ -165,7 +165,7 @@ export type Product = {
     [internalGroqTypeReferenceTo]?: "brand";
   };
   status?: "new" | "hot" | "sale";
-  variant?: "gadget" | "appliances" | "refrigerators" | "others";
+  variant?: "anime" | "marvel" | "others";
   isFeatured?: boolean;
 };
 
@@ -439,7 +439,7 @@ export type DEAL_PRODUCTSResult = Array<{
     [internalGroqTypeReferenceTo]?: "brand";
   };
   status?: "hot" | "new" | "sale";
-  variant?: "appliances" | "gadget" | "others" | "refrigerators";
+  variant?: "anime" | "marvel" | "others" ;
   isFeatured?: boolean;
 }>;
 // Variable: PRODUCT_BY_SLUG_QUERY
@@ -483,7 +483,7 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
     [internalGroqTypeReferenceTo]?: "brand";
   };
   status?: "hot" | "new" | "sale";
-  variant?: "appliances" | "gadget" | "others" | "refrigerators";
+  variant?: "anime" | "marvel" | "others" ;
   isFeatured?: boolean;
 } | null;
 // Variable: BRAND_QUERY
@@ -551,7 +551,7 @@ export type MY_ORDERS_QUERYResult = Array<{
         [internalGroqTypeReferenceTo]?: "brand";
       };
       status?: "hot" | "new" | "sale";
-      variant?: "appliances" | "gadget" | "others" | "refrigerators";
+      variant?: "anime" | "marvel" | "others" ;
       isFeatured?: boolean;
     } | null;
     quantity?: number;
