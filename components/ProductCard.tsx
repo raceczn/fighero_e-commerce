@@ -52,7 +52,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         )}
         <Title className="text-sm line-clamp-1">{product?.name}</Title>
 
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
               <StarIcon
@@ -65,7 +65,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             ))}
           </div>
           <p className="text-lightText text-xs tracking-wide">5 Reviews</p>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-2.5">
           <p className="font-medium">In Stock</p>
