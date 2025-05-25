@@ -92,7 +92,7 @@ export default function Hero() {
         </div>
 
         <h1 className="px-6 text-4xl md:text-5xl lg:text-7xl font-medium text-center mt-6 text-white">
-          Level Up Your Collection with Fighero.
+          Level Up Your Collection with Fighero..
         </h1>
         <p className="text-center text-xl text-white/80 mt-8 max-w-2xl mx-auto">
           We help collectors find, discover, and purchase their favorite figures
