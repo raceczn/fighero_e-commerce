@@ -12,7 +12,7 @@ const bgColors = [
 
 const HomeCategories = ({ categories }: { categories: Category[] }) => {
   return (
-    <div className="bg-white border border-shop_light_green/20 my-10 md:my-20 p-5 lg:p-7 rounded-md">
+    <div className="mt-4 bg-white border border-shop_light_green/20 my-10 md:my-20 p-2 lg:p-5 rounded-md">
       <Title className="border-b pb-3">Popular Categories</Title>
 
       <div className="mt-5 grid grid-cols-6 gap-5">
@@ -24,7 +24,7 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
             style={{ backgroundColor: bgColors[index % bgColors.length] }}
           >
             {category?.image && (
-              <div className="relative w-24 h-24 mb-3">
+              <div className="relative w-30 h-30 mb-3">
                 <Image
                   src={urlFor(category.image).width(400).url()}
                   alt={category.title || "Category Image"}
@@ -34,12 +34,12 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
               </div>
             )}
             <h3 className="text-sm font-semibold text-gray-800">{category?.title}</h3>
-            <p className="text-xs text-gray-600 mt-1">
+            {/* <p className="text-xs text-gray-600 mt-1">
               <span className="font-bold text-shop_dark_green">
                 ({category?.productCount || 0})
               </span>{" "}
               items available
-            </p>
+            </p> */}
           </Link>
         ))}
       </div>

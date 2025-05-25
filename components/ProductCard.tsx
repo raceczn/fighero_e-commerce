@@ -42,6 +42,23 @@ const ProductCard = ({ product }: { product: Product }) => {
             )}
           </Link>
         )}
+        <ProductSideMenu product={product} />
+        {product?.status === "sale" ? (
+          <p className="absolute top-2 left-2 z-10 text-xs border border-orange-500 bg-orange-100 px-3 rounded-full text-orange-700 group-hover:border-orange-600 hover:text-orange-800 hoverEffect">
+            Sale!
+          </p>
+        ) : (
+          <Link
+            href={"/deal"}
+            className="absolute top-2 left-2 z-10 border border-shop_orange/50 p-1 rounded-full group-hover:border-shop_orange hover:text-shop_dark_green hoverEffect"
+          >
+            <Flame
+              size={18}
+              fill="#fb6c08"
+              className="text-shop_orange/50 group-hover:text-shop_orange hoverEffect"
+            />
+          </Link>
+        )}
       </div>
 
       <div className="p-3 flex flex-col gap-2">
@@ -52,7 +69,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         )}
         <Title className="text-sm line-clamp-1">{product?.name}</Title>
 
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
               <StarIcon
@@ -65,7 +82,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             ))}
           </div>
           <p className="text-lightText text-xs tracking-wide">5 Reviews</p>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-2.5">
           <p className="font-medium">In Stock</p>
