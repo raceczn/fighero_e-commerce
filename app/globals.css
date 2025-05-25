@@ -1,6 +1,22 @@
 @import "tailwindcss";
 
+@tailwind utilities;
+
 @plugin "tailwindcss-animate";
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0.625rem); /* Start off-screen to the right */
+  }
+  100% {
+    transform: translateX(-100%); /* Move off-screen to the left */
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 15s linear infinite; /* Adjust duration for speed */
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -152,3 +168,4 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
