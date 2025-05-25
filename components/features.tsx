@@ -121,7 +121,7 @@ export const BentoCard = ({
 };
 
 const Features = () => (
-  <section className="pb-20 mt-10 md:mt-20">
+  <section className="pb-10 mt-10 md:mt-20">
     <div className="container mx-auto px-0 md:px-5">
       <div className="mb-10 text-center">
         <h2 className="text-xl md:text-2xl font-bold">
