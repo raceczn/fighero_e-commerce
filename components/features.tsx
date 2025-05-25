@@ -102,7 +102,7 @@ export const BentoCard = ({
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="relative z-20 mt-5 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/20"
+            className="relative z-20 mt-5 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/50"
           >
             <div
               className="pointer-events-none absolute -inset-px transition duration-300"
@@ -125,46 +125,47 @@ const Features = () => (
     <div className="container mx-auto px-0 md:px-5">
       <div className="mb-10 text-center">
         <h2 className="text-xl md:text-2xl font-bold">
-          Explore Our Action Figures
+          Discover What's <span className="text-[#003092]">Coming Soon</span>{" "}
+          &amp; Be the First to Collect
         </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
         <BentoTilt className="md:row-span-2">
           <BentoCard
-            src="videos/feature-2.mp4"
+            src="videos/featuresvid.mp4"
             title={
               <>
-                zig<b>m</b>a
+                <b> Kaiju No.8</b>
               </>
             }
-            description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
+            description="Get ready for the arrival of the Kaiju No. 8 action figure. Stay tuned, pre-orders will be available soon!"
             isComingSoon
           />
         </BentoTilt>
 
         <BentoTilt>
           <BentoCard
-            src="videos/feature-3.mp4"
+            src="videos/sungjinwoo.mp4"
             title={
               <>
-                n<b>e</b>xus
+                <b>Sung Jinwoo</b>
               </>
             }
-            description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
+            description="The Shadow Monarch is coming! Stay tuned,pre-orders opening soon!"
             isComingSoon
           />
         </BentoTilt>
 
         <BentoTilt>
           <BentoCard
-            src="videos/feature-4.mp4"
+            src="videos/wolverine.mp4"
             title={
               <>
-                az<b>u</b>l
+                <b>Wolverine</b>
               </>
             }
-            description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
+            description="Get ready for the claws to come out! A great addition for any Marvel fan or collector."
             isComingSoon
           />
         </BentoTilt>
@@ -180,7 +181,7 @@ const Features = () => (
 
         <BentoTilt>
           <video
-            src="videos/feature-5.mp4"
+            src="videos/hero-4.mp4"
             loop
             muted
             autoPlay
