@@ -25,7 +25,8 @@ const ProductCard = ({ product }: { product: Product }) => {
               alt="productImage"
               fill
               priority
-              className="object-contain transition-opacity duration-500 group-hover:opacity-0"
+              className="object-cover transition-opacity duration-500 group-hover:opacity-0"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
 
             {/* Second image (hover), if available */}
@@ -35,7 +36,8 @@ const ProductCard = ({ product }: { product: Product }) => {
                 alt="productImageHover"
                 fill
                 priority
-                className="object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             )}
           </Link>

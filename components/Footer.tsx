@@ -18,8 +18,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Logo />
             <SubText>
-              Discover curated furniture collections at Shopcartyt, blending
-              style and comfort to elevate your living spaces.
+                Your ultimate destination for discovering rare finds and iconic collectibles. From anime, marvel figures to plushies and trading cards, we make it easy to shop, collect, and conquer — all in one place.
             </SubText>
             <SocialMedia
               className="text-darkColor/60"
