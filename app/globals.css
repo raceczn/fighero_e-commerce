@@ -6,17 +6,25 @@
 
 @keyframes marquee {
   0% {
-    transform: translateX(0.625rem); /* Start off-screen to the right */
+    transform: translateX(0%);
   }
+
   100% {
-    transform: translateX(-100%); /* Move off-screen to the left */
+    transform: translateX(-50%);
   }
 }
 
 .animate-marquee {
   display: flex;
-  animation: marquee 15s linear infinite; /* Adjust duration for speed */
+  width: 200%;
+  animation: marquee 20s linear infinite;
+  
 }
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -150,12 +158,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   .hoverEffect {
     @apply transition-all duration-300 ease-in-out;
   }
+
   button {
     @apply hover:cursor-pointer;
   }
@@ -168,4 +179,3 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-

@@ -4,18 +4,29 @@ import Link from "next/link";
 import { getAllBrands } from "@/sanity/queries";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import {
-  GitCompareArrows,
-  Headset,
-  ShieldCheck,
-  Truck,
-} from "lucide-react";
+import { GitCompareArrows, Headset, ShieldCheck, Truck } from "lucide-react";
 
 const extraData = [
-  { title: "Free Delivery", description: "Free shipping over $100", icon: <Truck size={45} /> },
-  { title: "Free Return", description: "Return within 30 days", icon: <GitCompareArrows size={45} /> },
-  { title: "Customer Support", description: "Friendly 24/7 support", icon: <Headset size={45} /> },
-  { title: "Money Back Guarantee", description: "Quality checked by our team", icon: <ShieldCheck size={45} /> },
+  {
+    title: "Free Delivery",
+    description: "Free shipping over $100",
+    icon: <Truck size={45} />,
+  },
+  {
+    title: "Free Return",
+    description: "Return within 30 days",
+    icon: <GitCompareArrows size={45} />,
+  },
+  {
+    title: "Customer Support",
+    description: "Friendly 24/7 support",
+    icon: <Headset size={45} />,
+  },
+  {
+    title: "Money Back Guarantee",
+    description: "Quality checked by our team",
+    icon: <ShieldCheck size={45} />,
+  },
 ];
 
 const ShopByBrands = async () => {
@@ -24,10 +35,15 @@ const ShopByBrands = async () => {
     <div className="mb-10 lg:mb-15 bg-shop_light_bg p-5 lg:p-7 rounded-md overflow-hidden">
       <div className="flex items-center gap-5 justify-between mb-10">
         <Title>Shop By Brands</Title>
-        <Link href="/shop" className="text-sm font-semibold tracking-wide hover:text-shop_btn_dark_green hoverEffect">View all</Link>
+        <Link
+          href="/shop"
+          className="text-sm font-semibold tracking-wide hover:text-shop_btn_dark_green hoverEffect"
+        >
+          View all
+        </Link>
       </div>
-      <div className="relative overflow-hidden h-28"> {/* Set a fixed height */}
-        <div className="flex animate-marquee w-screen gap-6"> {/* Removed w-[200%] */}
+      <div className="relative overflow-hidden h-28">
+        <div className="animate-marquee gap-6">
           {[...brands, ...brands].map((brand, index) => (
             <Link
               key={`${brand?._id}-${index}`}
@@ -50,12 +66,20 @@ const ShopByBrands = async () => {
           ))}
         </div>
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 p-2 shadow-sm hover:shadow-shop_light_green/20 py-5">
         {extraData.map((item, i) => (
-          <div key={i} className="flex items-center gap-3 group text-lightColor hover:text-shop_light_green">
-            <span className="inline-flex scale-100 group-hover:scale-90 hoverEffect">{item.icon}</span>
+          <div
+            key={i}
+            className="flex items-center gap-3 group text-lightColor hover:text-shop_light_green"
+          >
+            <span className="inline-flex scale-100 group-hover:scale-90 hoverEffect">
+              {item.icon}
+            </span>
             <div className="text-sm">
-              <p className="text-darkColor/80 font-bold capitalize">{item.title}</p>
+              <p className="text-darkColor/80 font-bold capitalize">
+                {item.title}
+              </p>
               <p className="text-lightColor">{item.description}</p>
             </div>
           </div>
