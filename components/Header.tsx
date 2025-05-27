@@ -12,7 +12,7 @@ import MobileMenu from "./MobileMenu";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Logs } from "lucide-react";
-import SyncClerkUser from "./SyncClerkUser";
+import SyncClerkUser from "./SyncUserToSanity";
 import React, { useEffect, useState } from "react";
 
 

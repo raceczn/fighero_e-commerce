@@ -1,4 +1,3 @@
-// sanity/schemas/userType.ts
 import { defineField, defineType } from "sanity";
 
 export const userType = defineType({
@@ -10,7 +9,7 @@ export const userType = defineType({
       name: "clerkId",
       title: "Clerk User ID",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required()
     }),
     defineField({
       name: "email",
@@ -25,6 +24,14 @@ export const userType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "profileImage",
+      title: "Profile Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: "createdAt",
       title: "Created At",
       type: "datetime",
@@ -35,6 +42,7 @@ export const userType = defineType({
     select: {
       title: "fullName",
       subtitle: "email",
+      media: "profileImage",
     },
   },
 });
