@@ -25,9 +25,9 @@ Fighero is built with performance, scalability, and user experience in mind, com
 
 - ❤️ **Wishlist** for saving favorite items to view or purchase later.
 
-- 📦 **Order Tracking** for viewing current order status and history from the user dashboard.
+- 📦 **Order Tracking** for viewing current order status and history.
 - 👤 **Clerk-powered user auth** for login and account management
-- 🧾 **CMS-powered content** via Sanity for easy admin editing. Developers can use GROQ queries to fetch content in real time and perform CRUD operations.
+- 🧾 **Admin Dashboard** for easy admin editing. Developers can use GROQ queries to fetch content in real time and perform CRUD operations.
 - 🖼️ **Dynamic product listings**, search, and category filters
 
 ---
