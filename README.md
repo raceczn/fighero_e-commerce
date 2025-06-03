@@ -44,7 +44,7 @@ Fighero is built with performance, scalability, and user experience in mind, com
 | **Tailwind CSS** | Utility-first styling for responsive design            |
 | **Clerk**     | Handles user authentication and profile management       |
 
-### Backend / Headless CMS
+### Backend 
 
 | Tech          | Role                                                      |
 |---------------|-----------------------------------------------------------|
