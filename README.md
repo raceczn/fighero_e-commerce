@@ -1,4 +1,4 @@
-# 🦸‍♂️ Fighero – The Ultimate Action Figure E-commerce Platform
+# Fighero – The Ultimate Action Figure E-commerce Platform 🦸‍♂️
 
 **Fighero** (from *"Fig"* for *figure* and *"Hero"*) is a full-featured, modern e-commerce platform tailored for fans, collectors, and enthusiasts of action figures and collectible merchandise. It offers a wide range of items—from anime and superhero figures to exclusive collectibles and trading cards—sourced from various reputable brands and creators.
 
@@ -6,7 +6,7 @@ Fighero is built with performance, scalability, and user experience in mind, com
 
 ---
 
-## 🛍️ What You Can Buy
+## What You Can Buy
 
 - Anime figures (e.g., Naruto, One Piece, Demon Slayer)
 - Marvel & DC superheroes (e.g., Iron Man, Batman, Spider-Man)
@@ -16,19 +16,19 @@ Fighero is built with performance, scalability, and user experience in mind, com
 
 ---
 
-## 💡 Key Highlights
+## Key Highlights
 
-- ⚡ **Fast and responsive interface** for seamless shopping
-- 🛒 **Add to Cart & Checkout** for seamless shopping experience with dynamic pricing and quantity management.
-- 🔐 **Secure Stripe integration** for hassle-free payments
-- 🧾 **Invoices** for users receive detailed invoices for every order.
+- **Fast and responsive interface** for seamless shopping
+- **Add to Cart & Checkout** for seamless shopping experience with dynamic pricing and quantity management.
+- **Secure Stripe integration** for hassle-free payments
+- **Invoices** for users receive detailed invoices for every order.
 
-- ❤️ **Wishlist** for saving favorite items to view or purchase later.
+- **Wishlist** for saving favorite items to view or purchase later.
 
-- 📦 **Order Tracking** for viewing current order status and history.
-- 👤 **Clerk-powered user auth** for login and account management
-- 🧾 **Admin Dashboard** for easy admin editing. Developers can use GROQ queries to fetch content in real time and perform CRUD operations.
-- 🖼️ **Dynamic product listings**, search, and category filters
+- **Order Tracking** for viewing current order status and history.
+- **Clerk-powered user auth** for login and account management
+- **Admin Dashboard** for easy admin editing. Developers can use GROQ queries to fetch content in real time and perform CRUD operations.
+- **Dynamic product listings**, search, and category filters
 
 ---
 
