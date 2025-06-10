@@ -48,7 +48,7 @@ const AddToCartButton = ({ product, className }: Props) => {
           onClick={handleAddToCart}
           disabled={isOutOfStock}
           className={cn(
-            "w-full bg-shop_dark_green/80 text-lightBg shadow-none border border-shop_dark_green/80 font-semibold tracking-wide text-white hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect",
+            "w-full bg-[#254D70] text-lightBg shadow-none border border-[#131D4F] font-semibold tracking-wide text-white hover:bg-[#131D4F] hover:border-shop_dark_green hoverEffect",
             className
           )}
         >

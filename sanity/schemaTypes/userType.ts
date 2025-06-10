@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export const userType = defineType({
   name: "user",
-  title: "User",
+  title: "Users",
   type: "document",
   fields: [
     defineField({
@@ -30,6 +30,13 @@ export const userType = defineType({
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: "addresses",
+      title: "Addresses",
+      type: "array",
+      of: [{ type: "address" }],
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "createdAt",

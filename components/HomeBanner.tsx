@@ -149,7 +149,7 @@ export default function Hero() {
         <div className="mt-4 flex justify-center gap-4 sm:mt-6">
           <Link
             href="/shop"
-            className="px-12 inline-block rounded-lg border border-white/30 bg-gradient-to-r from-[#008080] to-[#009990] px-6 py-3 font-medium text-white shadow-md transition-all hover:shadow-lg hover:from-[#008080]/90 hover:to-[#009990]/90 focus:outline-none focus:ring-2 focus:ring-[#3A59D7] focus:ring-offset-2 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-block rounded-lg border border-white/30 bg-gradient-to-r from-[#1177bb] to-[#0d65c9] px-6 py-3 font-medium text-white shadow-md transition-all hover:shadow-lg hover:from-[#008080]/90 hover:to-[#009990]/90 focus:outline-none focus:ring-2 focus:ring-[#3A59D7] focus:ring-offset-2 transform hover:-translate-y-0.5 active:translate-y-0"
           >
             Buy Now!
           </Link>

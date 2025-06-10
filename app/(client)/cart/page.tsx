@@ -111,7 +111,8 @@ const CartPage = () => {
               </div>
               <div className="grid lg:grid-cols-3 md:gap-8">
                 <div className="lg:col-span-2 rounded-lg">
-                  <div className="border bg-white rounded-md">
+                  <div className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
+                    {" "}
                     {groupedItems?.map(({ product }) => {
                       const itemCount = getItemCount(product?._id);
                       return (
@@ -141,18 +142,31 @@ const CartPage = () => {
                                 <h2 className="text-base font-semibold line-clamp-1">
                                   {product?.name}
                                 </h2>
-                                <p className="text-sm capitalize">
-                                  Variant:{" "}
-                                  <span className="font-semibold">
-                                    {product?.variant}
-                                  </span>
-                                </p>
-                                <p className="text-sm capitalize">
-                                  Status:{" "}
-                                  <span className="font-semibold">
-                                    {product?.status}
-                                  </span>
-                                </p>
+                                <div className="flex flex-col gap-1 text-sm text-gray-600">
+                                  <div className="flex items-center gap-2">
+                                    <span className="w-20 text-gray-500">
+                                      Variant:
+                                    </span>
+                                    <span className="font-medium text-gray-800 capitalize">
+                                      {product?.variant}
+                                    </span>
+                                  </div>
+
+                                  <div className="flex items-center gap-2">
+                                    <span className="w-20 text-gray-500">
+                                      Status:
+                                    </span>
+                                    <span
+                                      className={`font-medium capitalize ${
+                                        product
+                                          ? "text-amber-800"
+                                          : "text-amber-600"
+                                      }`}
+                                    >
+                                      {product?.status}
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
                               <div className="flex items-center gap-2">
                                 <TooltipProvider>
@@ -199,7 +213,7 @@ const CartPage = () => {
                     })}
                     <Button
                       onClick={handleResetCart}
-                      className="m-5 font-semibold"
+                      className="m-5 font-semibold transition-all duration-200 ease-in-out transform hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md"
                       variant="destructive"
                     >
                       Reset Cart
@@ -208,41 +222,8 @@ const CartPage = () => {
                 </div>
                 <div>
                   <div className="lg:col-span-1">
-                    <div className="hidden md:inline-block w-full bg-white p-6 rounded-lg border">
-                      <h2 className="text-xl font-semibold mb-4">
-                        Order Summary
-                      </h2>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <span>SubTotal</span>
-                          <PriceFormatter amount={getSubTotalPrice()} />
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span>Discount</span>
-                          <PriceFormatter
-                            amount={getSubTotalPrice() - getTotalPrice()}
-                          />
-                        </div>
-                        <Separator />
-                        <div className="flex items-center justify-between font-semibold text-lg">
-                          <span>Total</span>
-                          <PriceFormatter
-                            amount={getTotalPrice()}
-                            className="text-lg font-bold text-black"
-                          />
-                        </div>
-                        <Button
-                          className="w-full rounded-full font-semibold tracking-wide hoverEffect"
-                          size="lg"
-                          disabled={loading}
-                          onClick={handleCheckout}
-                        >
-                          {loading ? "Please wait..." : "Proceed to Checkout"}
-                        </Button>
-                      </div>
-                    </div>
                     {addresses && (
-                      <div className="bg-white rounded-md mt-5">
+                      <div className="bg-white rounded-md mb-5">
                         <Card>
                           <CardHeader>
                             <CardTitle>Delivery Address</CardTitle>
@@ -257,7 +238,10 @@ const CartPage = () => {
                                 <div
                                   key={address?._id}
                                   onClick={() => setSelectedAddress(address)}
-                                  className={`flex items-center space-x-2 mb-4 cursor-pointer ${selectedAddress?._id === address?._id && "text-shop_dark_green"}`}
+                                  className={`flex items-center space-x-2 mb-4 cursor-pointer ${
+                                    selectedAddress?._id === address?._id &&
+                                    "text-shop_dark_green"
+                                  }`}
                                 >
                                   <RadioGroupItem
                                     value={address?._id.toString()}
@@ -284,8 +268,43 @@ const CartPage = () => {
                         </Card>
                       </div>
                     )}
+
+                    <div className="hidden md:inline-block w-full bg-white p-6 rounded-lg border">
+                      <h2 className="text-xl font-semibold mb-4">
+                        Order Summary
+                      </h2>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span>Original Price:</span>
+                          <PriceFormatter amount={getSubTotalPrice()} />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span>Discount:</span>
+                          <PriceFormatter
+                            amount={getSubTotalPrice() - getTotalPrice()}
+                          />
+                        </div>
+                        <Separator />
+                        <div className="flex items-center justify-between font-semibold text-lg">
+                          <span>Total</span>
+                          <PriceFormatter
+                            amount={getTotalPrice()}
+                            className="text-lg font-bold text-black"
+                          />
+                        </div>
+                        <Button
+                          className="w-full rounded-lg font-bold tracking-wide hoverEffect"
+                          size="lg"
+                          disabled={loading}
+                          onClick={handleCheckout}
+                        >
+                          {loading ? "Please wait..." : "Proceed to Checkout"}
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
                 {/* Order summary for mobile view */}
                 <div className="md:hidden fixed bottom-0 left-0 w-full bg-white pt-2">
                   <div className="bg-white p-4 rounded-lg border mx-4">

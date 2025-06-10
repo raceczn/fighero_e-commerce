@@ -68,11 +68,11 @@ const Shop = ({ categories, brands }: Props) => {
   return (
     <div className="border-t">
       <Container className="mt-5">
-        <div className="sticky top-0 z-10 mb-5">
+        <div className="sticky top-0 z-10">
           <div className="flex items-center justify-between">
-            <Title className="text-lg uppercase tracking-wide">
+            {/* <Title className="text-lg uppercase tracking-wide">
               Get the products as your needs
-            </Title>
+            </Title> */}
             {(selectedCategory !== null ||
               selectedBrand !== null ||
               selectedPrice !== null) && (
@@ -107,7 +107,7 @@ const Shop = ({ categories, brands }: Props) => {
             />
           </div>
           <div className="flex-1 pt-5">
-            <div className="h-[calc(100vh-160px)] overflow-y-auto pr-2 scrollbar-hide">
+            <div className="h-[calc(100vh-120px)] overflow-y-auto pr-2 scrollbar-hide">
               {loading ? (
                 <div className="p-20 flex flex-col gap-2 items-center justify-center bg-white">
                   <Loader2 className="w-10 h-10 text-shop_dark_green animate-spin" />
