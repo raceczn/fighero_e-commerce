@@ -7,17 +7,28 @@ interface Props {
   discount: number | undefined;
   className?: string;
 }
+
 const PriceView = ({ price, discount, className }: Props) => {
+  if (typeof price !== "number") return null;
+
+  const hasDiscount = typeof discount === "number" && discount > 0;
+  const discountedPrice = hasDiscount
+    ? price - (discount * price) / 100
+    : price;
+
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
+        {/* Discounted Price */}
         <PriceFormatter
-          amount={price}
-          className={cn("text-shop_dark_green", className)}
+          amount={discountedPrice}
+          className={cn("text-shop_dark_green font-semibold", className)}
         />
-        {price && discount && (
+
+        {/* Show original price only if there is a discount */}
+        {hasDiscount && (
           <PriceFormatter
-            amount={price + (discount * price) / 100}
+            amount={price}
             className={twMerge(
               "line-through text-xs font-normal text-zinc-500",
               className

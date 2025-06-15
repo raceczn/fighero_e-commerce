@@ -69,7 +69,7 @@ export default function Header() {
 
         {/* Right side - Search, Cart, Wishlist, Orders, Auth */}
         <div className="w-auto md:w-1/3 flex items-center justify-end gap-5">
-          <SearchBar />
+          {/* <SearchBar /> */}
 
           <div className="relative group">
             <CartIcon />

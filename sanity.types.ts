@@ -74,15 +74,15 @@ export type Address = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  email?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  default?: boolean;
-  createdAt?: string;
+  name: string;
+  address: string;
+  barangay: string;
+  city: string;
+  province: string;
+  zip: string;
+  isDefault: boolean;
 };
+
 
 export type Order = {
   _id: string;
@@ -116,7 +116,8 @@ export type Order = {
   currency?: string;
   amountDiscount?: number;
   address?: {
-    state?: string;
+    barangay?: string;
+    province?: string;
     zip?: string;
     city?: string;
     address?: string;
@@ -561,7 +562,8 @@ export type MY_ORDERS_QUERYResult = Array<{
   currency?: string;
   amountDiscount?: number;
   address?: {
-    state?: string;
+    barangay?: string;
+    province?: string;
     zip?: string;
     city?: string;
     address?: string;
