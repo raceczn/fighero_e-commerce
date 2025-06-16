@@ -16,10 +16,8 @@ export const quickLinksData = [
 export const categoriesData = [
   { title: "Anime", href: "anime" },
   { title: "Marvel", href: "marvel" },
-  { title: "Detective Comics", href: "detective-comics-dc" },
-  { title: "Movie & Action Figures", href: "movie-and-tv-action-figures" },
-  { title: "Video Game Action Figure", href: "video-game-action-figures" },
-  { title: "Cartoon", href: "cartoon" },
+  { title: "Detective Comics", href: "dc" },
+  { title: "Hirono", href: "hirono" },
   { title: "Collectible Cards", href: "collectible-cards" },
   { title: "Plushies & Soft Toys", href: "plushies-and-soft-toys" },
 ];
@@ -27,5 +25,7 @@ export const categoriesData = [
 export const productType = [
   { title: "Anime", value: "anime" },
   { title: "Marvel", value: "marvel" },
+  { title: "Detective Comics", value: "dc" },
+  { title: "Hirono", value: "hirono" },
   { title: "Others", value: "others" },
 ];

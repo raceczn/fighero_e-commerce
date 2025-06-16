@@ -12,6 +12,20 @@
         validation: (Rule) => Rule.required()
       }),
       defineField({
+      name: "role",
+      title: "Role",
+      type: "string",
+      options: {
+        list: [
+          { title: "Admin", value: "admin" },
+          { title: "User", value: "user" }
+        ],
+        layout: "dropdown",
+      },
+      initialValue: "user", 
+      validation: (Rule) => Rule.required(),
+    }),
+      defineField({
         name: "email",
         title: "Email",
         type: "email",

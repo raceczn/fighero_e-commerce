@@ -86,6 +86,8 @@ export const productType = defineType({
         list: [
           { title: "Anime", value: "anime" },
           { title: "Marvel", value: "marvel" },
+          { title: "Hirono", value: "hirono" },
+          { title: "Detective Comics", value: "dc" },
           { title: "Others", value: "others" },
         ],
       },
