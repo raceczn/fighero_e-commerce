@@ -40,6 +40,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import AddAddressForm from "@/components/AddAddressForm";
+import { Trash2 } from "lucide-react";
 
 const CartPage = () => {
   const {
@@ -62,6 +63,7 @@ const CartPage = () => {
 
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const fetchAddresses = async () => {
     if (!user?.id) {
@@ -123,7 +125,7 @@ const CartPage = () => {
         }
       }
 
-      // Fallback to default or first address if no saved address or saved address not found
+      // Fallback to default or first address if no saved address
       const defaultAddress = addresses.find((addr) => addr.isDefault);
       setSelectedAddress(defaultAddress || addresses[0]);
     }
@@ -153,6 +155,8 @@ const CartPage = () => {
         customerEmail: user?.emailAddresses[0]?.emailAddress ?? "Unknown",
         clerkUserId: user?.id ?? "",
         address: selectedAddress,
+        totalAmount: getTotalPrice(), // Add this
+        subtotalAmount: getSubTotalPrice(), // Add this
       };
       const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
       if (checkoutUrl) {
@@ -166,10 +170,55 @@ const CartPage = () => {
     }
   };
 
+  // Handle address addition
   const handleAddressAdded = (newAddress: Address) => {
     setAddresses((prev) => [newAddress, ...prev]);
     setSelectedAddress(newAddress);
+    setIsDialogOpen(false);
     toast.success("Address added successfully!");
+  };
+
+  // Handle address deletion
+  const handleDeleteAddress = async (addressId: string) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this address?"
+    );
+    if (!confirmed) return;
+
+    try {
+      const res = await fetch("/api/delete-address", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ addressId }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("API Error Details:", data); // Log detailed error
+        throw new Error(
+          data.error || data.details || "Failed to delete address"
+        );
+      }
+
+      // Update local state
+      setAddresses((prev) => prev.filter((addr) => addr._id !== addressId));
+
+      // Update selected address if needed
+      if (selectedAddress?._id === addressId) {
+        const remaining = addresses.filter((addr) => addr._id !== addressId);
+        setSelectedAddress(
+          remaining.find((a) => a.isDefault) || remaining[0] || null
+        );
+      }
+
+      toast.success("Address deleted successfully!");
+    } catch (error: any) {
+      console.error("Full deletion error:", error);
+      toast.error(error.message || "Failed to delete address");
+    }
   };
 
   return (
@@ -180,7 +229,7 @@ const CartPage = () => {
             <>
               <div className="flex items-center gap-2 py-5">
                 <ShoppingBag className="text-darkColor" />
-                <Title>Shopping Cart</Title>
+                <Title>Your Cart</Title>
               </div>
               <div className="grid lg:grid-cols-3 md:gap-8">
                 <div className="lg:col-span-2 rounded-lg">
@@ -351,24 +400,22 @@ const CartPage = () => {
                                 if (address) setSelectedAddress(address);
                               }}
                             >
-                              {addresses.map(
-                                (
-                                  address // This maps over all addresses
-                                ) => (
-                                  <div
-                                    key={address._id}
-                                    className={`flex items-center space-x-2 mb-4 cursor-pointer ${
-                                      selectedAddress?._id === address._id &&
-                                      "text-shop_dark_green"
-                                    }`}
-                                  >
+                              {addresses.map((address) => (
+                                <div
+                                  key={address._id}
+                                  className={`flex items-center justify-between space-x-2 mb-4 cursor-pointer ${
+                                    selectedAddress?._id === address._id &&
+                                    "text-shop_dark_green"
+                                  }`}
+                                >
+                                  <div className="flex items-center space-x-2 flex-1">
                                     <RadioGroupItem
                                       value={address._id}
                                       id={`address-${address._id}`}
                                     />
                                     <Label
                                       htmlFor={`address-${address._id}`}
-                                      className="grid gap-1.5 flex-1"
+                                      className="grid gap-1.5"
                                     >
                                       <span className="font-semibold">
                                         {address.name}
@@ -384,14 +431,26 @@ const CartPage = () => {
                                       </span>
                                     </Label>
                                   </div>
-                                )
-                              )}
+                                  <button
+                                    onClick={() =>
+                                      handleDeleteAddress(address._id)
+                                    }
+                                    className="text-red-500 hover:text-red-700"
+                                    title="Delete Address"
+                                  >
+                                    <Trash2 size={18} />
+                                  </button>
+                                </div>
+                              ))}
                             </RadioGroup>
                           ) : (
                             <p className="text-gray-500 mb-4">No address yet</p>
                           )}
 
-                          <Dialog>
+                          <Dialog
+                            open={isDialogOpen}
+                            onOpenChange={setIsDialogOpen}
+                          >
                             <DialogTrigger asChild>
                               <Button variant="outline" className="w-full mt-4">
                                 {addresses.length > 0

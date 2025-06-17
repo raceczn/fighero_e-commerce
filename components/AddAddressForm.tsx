@@ -60,7 +60,6 @@ export default function AddAddressForm({
 
       const createdAddress = await response.json();
 
-      toast.success("Address added successfully!");
       onSuccess({
         _id: createdAddress._id,
         _type: "address",

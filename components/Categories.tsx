@@ -10,7 +10,7 @@ import Overlay from "./Overlay";
 const Categories = () => {
   return (
     <div className="space-y-12">
-      {/* 🧩 Top Text Section */}
+      {/*Top Text Section */}
       <div className="pt-10 flex flex-col gap-8 md:flex-row">
         <div className="flex-1">
           <p className="text-nowrap text-4xl font-semibold md:text-6xl">
@@ -25,7 +25,7 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* 🖼️ Categories Grid */}
+      {/*Categories Grid */}
       <div className="grid auto-rows-[300px] grid-cols-2 gap-4 md:auto-rows-[330px] md:grid-cols-4">
         <Link
           href={{
