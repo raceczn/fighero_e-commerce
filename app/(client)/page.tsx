@@ -6,6 +6,8 @@ import ShopByBrands from "@/components/ShopByBrands";
 import Features from "@/components/features";
 import Integration from "@/components/Integrations";
 import { getCategories } from "@/sanity/queries";
+import Categories from '@/components/Categories';
+
 
 import React from "react";
 
@@ -16,6 +18,7 @@ const Home = async () => {
     <Container className="bg-shop-light-pink">
       <HomeBanner />
       <ProductGrid />
+      <Categories/>
       <Features />
       <HomeCategories categories={categories} />
       <ShopByBrands />

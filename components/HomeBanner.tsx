@@ -62,7 +62,7 @@ export default function Hero() {
   const isVideo = currentMedia.endsWith(".mp4");
 
   return (
-    <section className={`${inter.className} relative py-28 overflow-hidden`}>
+    <section className={`${inter.className} relative py-24 overflow-hidden`}>
       {/* Background media */}
       <div className="absolute inset-0 z-0 transition-all duration-1000 ease-in-out">
         {isVideo ? (

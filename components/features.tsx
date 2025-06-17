@@ -122,12 +122,23 @@ export const BentoCard = ({
 
 const Features = () => (
   <section className="pb-10 mt-10 md:mt-20">
-    <div className="container mx-auto px-0 md:px-5">
-      <div className="mb-10 text-center">
-        <h2 className="text-xl md:text-2xl font-bold">
-          Discover What's <span className="text-[#003092]">Coming Soon</span>{" "}
-          &amp; Be the First to Collect
-        </h2>
+    <div className="container mx-auto px-0 md:px-0">
+      <div className="mb-10">
+        <div className="flex flex-col gap-8 md:flex-row">
+          <div className="flex-1">
+            <h2 className="text-nowrap text-4xl font-semibold md:text-6xl">
+              Discover What&apos;s{" "}  / <br />
+              <span className="text-[#003092]">Coming Soon...</span> 
+            </h2>
+          </div>
+          <div className="flex flex-1 items-center">
+            <div>
+              <span className="font-bold">Be the First to Collect</span> .{" "}
+              <br className="hidden sm:inline" />
+              Stay tuned for upcoming releases!
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
