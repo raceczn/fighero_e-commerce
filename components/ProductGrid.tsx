@@ -10,6 +10,7 @@ import Container from "./Container";
 import HomeTabbar from "./HomeTabbar";
 import { productType } from "@/constants/data";
 import { Product } from "@/sanity.types";
+import { ArrowRight } from "lucide-react";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -38,6 +39,7 @@ const ProductGrid = () => {
   return (
     <Container className="flex flex-col lg:px-0 my-10">
       <HomeTabbar selectedTab={selectedTab} onTabSelect={setSelectedTab} />
+
       {loading ? (
         <div className="flex flex-col items-center justify-center py-10 min-h-80 space-y-4 text-center bg-gray-100 rounded-lg w-full mt-10">
           <motion.div className="flex items-center space-x-2 text-blue-600">
@@ -46,9 +48,9 @@ const ProductGrid = () => {
           </motion.div>
         </div>
       ) : products?.length ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
-          <>
-            {products?.map((product) => (
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
+            {products.slice(0, 10).map((product) => (
               <AnimatePresence key={product?._id}>
                 <motion.div
                   layout
@@ -60,8 +62,20 @@ const ProductGrid = () => {
                 </motion.div>
               </AnimatePresence>
             ))}
-          </>
-        </div>
+          </div>
+
+          {products.length > 10 && (
+            <div className="mt-8 text-center">
+              <a
+                href="/shop"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 transition"
+              >
+                See More
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          )}
+        </>
       ) : (
         <NoProductAvailable selectedTab={selectedTab} />
       )}

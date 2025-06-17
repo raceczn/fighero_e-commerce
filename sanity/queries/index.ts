@@ -62,6 +62,7 @@ const getDealProducts = async () => {
     return [];
   }
 };
+
 const getProductBySlug = async (slug: string) => {
   try {
     const product = await sanityFetch({
