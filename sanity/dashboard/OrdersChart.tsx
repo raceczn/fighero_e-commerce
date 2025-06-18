@@ -56,7 +56,7 @@ export default function OrdersChart() {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
-        <CartesianGrid stroke="#FBFFFF" strokeDasharray="3 3" />
+        <CartesianGrid stroke="#CCCCCC" strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis allowDecimals={false} />
         <Tooltip />
