@@ -1,6 +1,27 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 
+interface SanityAddress {
+  _id: string;
+  _type: string;
+  name?: string;
+  address?: string;
+  barangay?: string;
+  city?: string;
+  province?: string;
+  zip?: string;
+  isDefault?: boolean;
+  user?: {
+    _type: string;
+    _ref: string;
+  };
+}
+
+interface SanityUser {
+  _id: string;
+  addresses?: { _id: string }[];
+}
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
@@ -9,7 +30,6 @@ const client = createClient({
   useCdn: false,
 });
 
-// app/api/addresses/route.ts
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -29,7 +49,7 @@ export async function POST(req: Request) {
       _id,
       addresses[]->{_id}
     }`;
-    const user = await client.fetch(userQuery, { clerkId: userId });
+    const user: SanityUser = await client.fetch(userQuery, { clerkId: userId });
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -42,11 +62,11 @@ export async function POST(req: Request) {
       try {
         // Find all addresses for this user that are marked as default
         const defaultAddressesQuery = `*[_type == "address" && user._ref == $userId && isDefault == true]`;
-        const defaultAddresses = await client.fetch(defaultAddressesQuery, { userId: sanityUserId });
+        const defaultAddresses: SanityAddress[] = await client.fetch(defaultAddressesQuery, { userId: sanityUserId });
 
         // Update each default address to set isDefault to false
         await Promise.all(
-          defaultAddresses.map((addr: any) =>
+          defaultAddresses.map((addr) =>
             client.patch(addr._id).set({ isDefault: false }).commit()
           )
         );
@@ -56,7 +76,7 @@ export async function POST(req: Request) {
     }
 
     // Create the new address
-    const newAddress = {
+    const newAddress: Omit<SanityAddress, '_id'> = {
       _type: "address",
       name,
       address,
@@ -95,13 +115,14 @@ export async function POST(req: Request) {
 
     return NextResponse.json(createdAddress, { status: 201 });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API error creating address:", error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json(
       {
         message: "Failed to create address",
-        details: error.message,
-        ...(process.env.NODE_ENV === "development" ? { stack: error.stack } : {}),
+        details: errorMessage,
+        ...(process.env.NODE_ENV === "development" && error instanceof Error ? { stack: error.stack } : {}),
       },
       { status: 500 }
     );

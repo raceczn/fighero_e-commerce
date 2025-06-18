@@ -36,13 +36,21 @@ export async function DELETE(req: NextRequest) {
     await client.delete(cleanId);
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Full deletion error:", error);
+    let errorMessage = "Failed to delete address";
+    let stack: string | undefined;
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      stack = process.env.NODE_ENV === "development" ? error.stack : undefined;
+    }
+
     return NextResponse.json(
       { 
-        error: "Failed to delete address",
-        details: error.message,
-        stack: process.env.NODE_ENV === "development" ? error.stack : undefined
+        error: errorMessage,
+        details: error instanceof Error ? error.message : undefined,
+        stack
       },
       { status: 500 }
     );

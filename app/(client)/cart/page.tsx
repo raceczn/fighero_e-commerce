@@ -30,7 +30,7 @@ import { useAuth, useUser } from "@clerk/nextjs";
 import { ShoppingBag, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   Dialog,
@@ -65,7 +65,8 @@ const CartPage = () => {
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const fetchAddresses = async () => {
+  // Replace the current fetchAddresses declaration with this:
+  const fetchAddresses = useCallback(async () => {
     if (!user?.id) {
       console.log("No user ID available");
       return;
@@ -74,7 +75,6 @@ const CartPage = () => {
     try {
       console.log("Fetching addresses for user:", user.id);
 
-      // query to fetch addresses for the current user
       const addressQuery = `*[_type == "address" && user._ref == $userRef]{
       _id,
       name,
@@ -88,7 +88,7 @@ const CartPage = () => {
     }`;
 
       const addressData = await client.fetch(addressQuery, {
-        userRef: `user.${user.id}`, // Use the same custom ID format as in sync
+        userRef: `user.${user.id}`,
       });
 
       console.log("Fetched addresses:", addressData);
@@ -97,14 +97,14 @@ const CartPage = () => {
       console.error("Addresses fetching error:", error);
       toast.error("Failed to load addresses");
     }
-  };
+  }, [user?.id]); // Add user.id as dependency
 
-  // Update your useEffect dependencies
+  // Then update your useEffect to include fetchAddresses in dependencies
   useEffect(() => {
     if (isSignedIn && user?.id) {
       fetchAddresses();
     }
-  }, [isSignedIn, user]);
+  }, [isSignedIn, user?.id, fetchAddresses]);
 
   useEffect(() => {
     if (selectedAddress) {
@@ -197,16 +197,14 @@ const CartPage = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        console.error("API Error Details:", data); // Log detailed error
+        console.error("API Error Details:", data);
         throw new Error(
           data.error || data.details || "Failed to delete address"
         );
       }
 
-      // Update local state
       setAddresses((prev) => prev.filter((addr) => addr._id !== addressId));
 
-      // Update selected address if needed
       if (selectedAddress?._id === addressId) {
         const remaining = addresses.filter((addr) => addr._id !== addressId);
         setSelectedAddress(
@@ -215,9 +213,15 @@ const CartPage = () => {
       }
 
       toast.success("Address deleted successfully!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Full deletion error:", error);
-      toast.error(error.message || "Failed to delete address");
+      let errorMessage = "Failed to delete address";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+      toast.error(errorMessage);
     }
   };
 

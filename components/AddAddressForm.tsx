@@ -78,11 +78,13 @@ export default function AddAddressForm({
         zip: "",
         isDefault: false,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error adding address:", error);
-      toast.error(error.message || "Failed to add address");
-    } finally {
-      setLoading(false);
+
+      const message =
+        error instanceof Error ? error.message : "Failed to add address";
+
+      toast.error(message);
     }
   };
 

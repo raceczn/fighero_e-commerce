@@ -11,17 +11,19 @@ const SearchBar = ({ onSearch }: Props) => {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Focus the input when it's shown
   useEffect(() => {
     if (showInput) inputRef.current?.focus();
   }, [showInput]);
 
+  // Debounced search effect
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       onSearch(value);
-    }, 300); // debounce for smoother UX
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
-  }, [value]);
+  }, [value, onSearch]); // ✅ Include onSearch to satisfy exhaustive-deps
 
   return (
     <div className="relative flex items-center space-x-2">

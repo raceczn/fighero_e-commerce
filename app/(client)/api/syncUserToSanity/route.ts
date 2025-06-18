@@ -1,5 +1,3 @@
-// /app/api/syncUserToSanity/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 
@@ -11,6 +9,24 @@ const sanityClient = createClient({
   token: process.env.SANITY_API_TOKEN!,
 });
 
+interface SanityImage {
+  _type: "image";
+  asset: {
+    _type: "reference";
+    _ref: string;
+  };
+}
+
+interface SanityUser {
+  _type: "user";
+  _id?: string;
+  clerkId: string;
+  email: string;
+  fullName: string;
+  createdAt: string;
+  profileImage?: SanityImage;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { userId, email, firstName, lastName, profileImageUrl } = await req.json();
@@ -21,7 +37,6 @@ export async function POST(req: NextRequest) {
 
     console.log("API: Syncing user:", userId);
 
-    // Prevent duplicate creation
     const existingUser = await sanityClient.fetch(
       `*[_type == "user" && clerkId == $clerkId][0]`,
       { clerkId: userId }
@@ -30,7 +45,6 @@ export async function POST(req: NextRequest) {
     if (existingUser) {
       console.log("User already exists in Sanity:", existingUser._id);
 
-      // Update profile image if needed
       if (
         profileImageUrl &&
         (!existingUser.profileImage ||
@@ -61,8 +75,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(existingUser);
     }
 
-    // Create new user
-    const newUser: any = {
+    const newUser: SanityUser = {
       _type: "user",
       clerkId: userId,
       email: email || "",
@@ -87,15 +100,18 @@ export async function POST(req: NextRequest) {
 
     const createdUser = await sanityClient.createIfNotExists({
       ...newUser,
-      _id: `user.${userId}`, // custom ID based on Clerk ID
-    }); 
-    console.log("Created new user in Sanity:", createdUser._id);
+      _id: `user.${userId}`,
+    });
 
+    console.log("Created new user in Sanity:", createdUser._id);
     return NextResponse.json(createdUser);
   } catch (error) {
     console.error("Error syncing user:", error);
     return NextResponse.json(
-      { error: "Failed to sync user", details: error instanceof Error ? error.message : String(error) },
+      {
+        error: "Failed to sync user",
+        details: error instanceof Error ? error.message : String(error),
+      },
       { status: 500 }
     );
   }

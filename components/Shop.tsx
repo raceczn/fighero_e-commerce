@@ -1,7 +1,7 @@
 "use client";
 
 import { BRANDS_QUERYResult, Category, Product } from "@/sanity.types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Container from "./Container";
 import Title from "./Title";
 import CategoryList from "./shop/CategoryList";
@@ -35,7 +35,7 @@ const Shop = ({ categories, brands }: Props) => {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       let minPrice = 0;
@@ -64,18 +64,20 @@ const Shop = ({ categories, brands }: Props) => {
         { next: { revalidate: 0 } }
       );
 
-      const filtered = data.filter((product: Product & { categories?: string[] }) => {
-        const lowerSearch = searchTerm.toLowerCase();
-        const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
+      const filtered = data.filter(
+        (product: Product & { categories?: string[] }) => {
+          const lowerSearch = searchTerm.toLowerCase();
+          const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
 
-        const categoryMatch = Array.isArray(product.categories)
-          ? (product.categories as string[]).some(
-              (cat: string) => cat.toLowerCase().includes(lowerSearch)
-            )
-          : false;
+          const categoryMatch = Array.isArray(product.categories)
+            ? (product.categories as string[]).some((cat: string) =>
+                cat.toLowerCase().includes(lowerSearch)
+              )
+            : false;
 
-        return nameMatch || categoryMatch;
-      });
+          return nameMatch || categoryMatch;
+        }
+      );
 
       setProducts(filtered);
     } catch (error) {
@@ -83,11 +85,11 @@ const Shop = ({ categories, brands }: Props) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, selectedBrand, selectedPrice, searchTerm]);
 
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory, selectedBrand, selectedPrice, searchTerm]);
+  }, [fetchProducts]);
 
   return (
     <div className="border-t">

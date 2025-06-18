@@ -5,7 +5,8 @@ import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // or use any icon library
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,9 +19,9 @@ export default function Hero() {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const currentMedia = mediaList[currentMediaIndex];
 
-  const [leftDesignScope, leftDesignAnimate] = useAnimate();
+  const [leftDesignScope] = useAnimate();
   const [leftPointerScope, leftPointerAnimate] = useAnimate();
-  const [rightDesignScope, rightDesignAnimate] = useAnimate();
+  const [rightDesignScope] = useAnimate();
   const [rightPointerScope, rightPointerAnimate] = useAnimate();
 
   // Animate pointers on mount
@@ -39,7 +40,7 @@ export default function Hero() {
         { duration: 1, ease: "easeOut" },
       ],
     ]);
-  }, []);
+  }, [leftPointerAnimate, leftPointerScope, rightPointerAnimate, rightPointerScope]);
 
   // Auto slide every 10 seconds
   useEffect(() => {
@@ -78,11 +79,13 @@ export default function Hero() {
             Your browser does not support the video tag.
           </video>
         ) : (
-          <img
+          <Image
             key={currentMedia}
             src={currentMedia}
             alt="Background"
             className="w-full h-full object-cover"
+            fill
+            unoptimized // Remove this if you want Next.js to optimize the image
           />
         )}
         <div className="absolute inset-0 bg-black/50" />
