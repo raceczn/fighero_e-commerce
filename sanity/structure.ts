@@ -1,7 +1,22 @@
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from 'sanity/structure'
+import { DocumentIcon } from '@sanity/icons'
+import DashboardPage from './dashboard/DashboardPage' // your custom React component
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
-    .items(S.documentTypeListItems())
+    .items([
+      // ✅ Dashboard custom view
+      S.listItem()
+        .title('Dashboard')
+        .icon(DocumentIcon)
+        .child(
+          S.component()
+            .id('dashboard')
+            .title('Admin Dashboard')
+            .component(DashboardPage)
+        ),
+
+      // ✅ All other document types
+      ...S.documentTypeListItems(),
+    ])

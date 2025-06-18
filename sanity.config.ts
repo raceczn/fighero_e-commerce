@@ -1,35 +1,28 @@
 'use client'
 
 import React from 'react'
-import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
+import { visionTool } from '@sanity/vision'
 import { structureTool } from 'sanity/structure'
-import { customDocumentActions } from './sanity/plugins/customDocumentActions'
 
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
+import { customDocumentActions } from './sanity/plugins/customDocumentActions'
 import { apiVersion, dataset, projectId } from './sanity/env'
-import { schema } from './sanity/schemaTypes' // Fixed import path
+import { schema } from './sanity/schemaTypes'
 import { structure } from './sanity/structure'
 
 export default defineConfig({
   basePath: '/admin',
   projectId,
   dataset,
-  schema,
   title: 'Admin Panel',
-  
+  schema,
+
   plugins: [
-    structureTool({
-      structure,
-      title: 'Admin Panel',
-      name: 'dashboard',
-    }),
+    structureTool({ structure }), 
     visionTool({ defaultApiVersion: apiVersion }),
   ],
+
   document: {
-    actions: (prev, { schemaType }) => {
-      // You can add conditional logic here if needed
-      return customDocumentActions(prev)
-    }
+    actions: (prev, { schemaType }) => customDocumentActions(prev),
   },
 })

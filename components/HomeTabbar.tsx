@@ -30,7 +30,7 @@ const HomeTabbar = ({ selectedTab, onTabSelect }: Props) => {
 
       <Link
         href={"/shop"}
-        className="ml-3 shrink-0 border border-darkColor px-4 py-1 rounded-full hover:bg-shop_light_green hover:text-white hover:border-shop_light_green whitespace-nowrap"
+        className="ml-3 shrink-0 border border-darkColor px-4 py-1 rounded-full hover:bg-[#6a7f91] hover:text-white hover:border-[#254D70] whitespace-nowrap"
       >
         See all
       </Link>

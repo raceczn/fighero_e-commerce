@@ -4,7 +4,6 @@ import HomeCategories from "@/components/HomeCategories";
 import ProductGrid from "@/components/ProductGrid";
 import ShopByBrands from "@/components/ShopByBrands";
 import Features from "@/components/features";
-import Integration from "@/components/Integrations";
 import { getCategories } from "@/sanity/queries";
 import Categories from '@/components/Categories';
 
