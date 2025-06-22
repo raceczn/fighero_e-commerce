@@ -151,13 +151,8 @@ export type Product = {
   description?: string;
   price?: number;
   discount?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
+  categories?: string[]; // Instead of reference objects
+
   stock?: number;
   brand?: {
     _ref: string;
